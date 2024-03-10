@@ -19,13 +19,14 @@ body {
   flex-direction: column;
   height: 100dvh;
   width: 100%;
+  color: #cef196;
 }
 
 .logo {
-  height: min(8rem, 20dvw);
+  font-size: min(10rem, 25.1dvw);
   will-change: filter;
   transition: filter 300ms;
-  margin: 0 1rem;
+  margin: 0 0 -2rem 0;
 }
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
