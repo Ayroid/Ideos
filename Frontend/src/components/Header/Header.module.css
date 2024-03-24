@@ -26,5 +26,5 @@
 .icons {
   display: flex;
   justify-content: space-between;
-  width: 25%;
+  gap: 0.75rem;
 }
