@@ -1,6 +1,17 @@
-@font-face {
-  font-family: "Righteous", sans-serif;
-  src: url("../public/brand/fonts/Righteous.ttf");
+/* FONTS */
+@import url("https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Righteous&display=swap");
+
+:root {
+  --lightBg: #f5f7ef;
+  --darkBg: #131313;
+  --lightText: #f5f7ef;
+  --darkText: #131313;
+  --accentColor: #baff4c;
+  --dullColor: #d6d8d0;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 a:link,
@@ -15,9 +26,8 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Righteous", sans-serif;
-  background-color: #110f10;
-  color: #fff;
+  background-color: var(--lightBg);
+  color: var(--darkText);
 }
 
 .homeContainer {
@@ -30,50 +40,48 @@ body {
   color: #baff4c;
 }
 
-.logo {
-  font-size: min(10rem, 25.1dvw);
-  will-change: filter;
-  transition: filter 300ms;
-  margin: 0 0 -2rem 0;
-  letter-spacing: 0.2rem;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .logoSubheading {
-  color: #f5f1f0;
+  color: var(--darkText);
   font-weight: 900;
   font-size: min(3.25rem, 8.1dvw);
   margin: 1rem 0;
 }
 
 .logoSubheading span {
-  color: #baff4c;
+  color: var(--accentColor);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+.pageContainer {
+  height: 80dvh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  color: var(--darkText);
+  font-weight: 500;
+  font-size: 3rem;
+  padding-inline: 6dvw;
+  box-sizing: border-box;
+  font-family: "Dongle", sans-serif;
+}
+
+.crudButton {
+  font-weight: 900;
+  font-size: 2rem;
+  border: none;
+  border-radius: 10px;
+  padding-top: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  font-family: "Dongle", sans-serif;
+  &:active {
+    opacity: 0.75;
+    transition: background-color 0.15s;
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.icon {
+  height: 30px;
+  width: 30px;
 }

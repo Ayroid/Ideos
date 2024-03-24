@@ -1,36 +1,49 @@
-import { Route, Routes, Link } from "react-router-dom";
+import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
+// COMPONENTS IMPORT
+import Navigation from "./components/Navigation/Navigation";
+
+// PAGES IMPORT
+import IdeosPage from "./pages/IdeosPage/IdeosPage";
+import AppsPage from "./pages/AppsPage/AppsPage";
+import AnalyticsPage from "./pages/AnalyticsPage/AnalyticsPage";
+import NotificationPage from "./pages/NotificationPage/NotificationPage";
+import HomePage from "./pages/HomePage/HomePage";
+import Header from "./components/Header/Header";
+import SettingsPage from "./pages/SettingsPage/SettingsPage";
+
 function App() {
+  const [activeNavigationState, setActiveNavigationState] = useState("home");
+
+  const updateNavigation = (navLink) => {
+    if (navLink === activeNavigationState) {
+      return;
+    }
+    setActiveNavigationState(navLink);
+  };
+
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <div className="homeContainer">
-            <Link to={"/release"}>
-              <h1 className="logo">IDEOS</h1>
-            </Link>
-            <p className="logoSubheading">
-              LAUNCHING S<span>OO</span>N<span>!</span>
-            </p>
-          </div>
-        }
+    <div className="homeContainer">
+      <Header
+        activeNavigationState={activeNavigationState}
+        updateNavigation={updateNavigation}
       />
-      <Route
-        path="/release"
-        element={
-          <div className="homeContainer">
-            <Link to={"/"}>
-              <h1 className="logo">IDEOS</h1>
-            </Link>
-            <p className="logoSubheading">
-              RELEASING S<span>OO</span>N<span>!</span>
-            </p>
-          </div>
-        }
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/apps" element={<AppsPage />} />
+        <Route path="/analytics" element={<AnalyticsPage />} />
+        <Route path="/notifications" element={<NotificationPage />} />
+        <Route path="/ideos" element={<IdeosPage />} />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+      <Navigation
+        activeNavigationState={activeNavigationState}
+        updateNavigation={updateNavigation}
       />
-    </Routes>
+    </div>
   );
 }
 
