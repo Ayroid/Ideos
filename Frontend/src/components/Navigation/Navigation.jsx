@@ -1,10 +1,19 @@
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import styles from "./Navigation.module.css";
+
+// REDUX IMPORT
+import { useDispatch, useSelector } from "react-redux";
+import { updateNavigation } from "../../redux/slices/activeNavigation";
 
 const { mainDiv, navLinkDiv } = styles;
 
-const Navigation = ({ activeNavigationState, updateNavigation }) => {
+const Navigation = () => {
+  const activeNavigationState = useSelector(
+    (state) => state.activeNavigation.value
+  );
+
+  const dispatch = useDispatch();
+
   const navLinks = [
     {
       title: "home",
@@ -45,7 +54,7 @@ const Navigation = ({ activeNavigationState, updateNavigation }) => {
           key={navLink.title}
           to={navLink.link}
           className={navLinkDiv}
-          onClick={updateNavigation.bind(this, navLink.title)}
+          onClick={() => dispatch(updateNavigation(navLink.title))}
         >
           <img
             className={"icon"}
@@ -60,11 +69,6 @@ const Navigation = ({ activeNavigationState, updateNavigation }) => {
       ))}
     </div>
   );
-};
-
-Navigation.propTypes = {
-  activeNavigationState: PropTypes.string.isRequired,
-  updateNavigation: PropTypes.func.isRequired,
 };
 
 export default Navigation;

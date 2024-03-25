@@ -1,10 +1,19 @@
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import styles from "./Header.module.css";
+
+// REDUX IMPORT
+import { useDispatch, useSelector } from "react-redux";
+import { updateNavigation } from "../../redux/slices/activeNavigation";
 
 const { mainDiv, navLinkDiv, logo, icons } = styles;
 
-const Header = ({ activeNavigationState, updateNavigation }) => {
+const Header = () => {
+  const activeNavigationState = useSelector(
+    (state) => state.activeNavigation.value
+  );
+
+  const dispatch = useDispatch();
+
   return (
     <div className={mainDiv}>
       <h2 className={logo}>IDEOS</h2>
@@ -12,14 +21,14 @@ const Header = ({ activeNavigationState, updateNavigation }) => {
         <Link
           to={"/search"}
           className={navLinkDiv}
-          onClick={updateNavigation.bind(this, "search")}
+          onClick={() => dispatch(updateNavigation("search"))}
         >
           <img className={"icon"} src={"/icons/search.png"} alt={"search"} />
         </Link>
         <Link
           to={"/settings"}
           className={navLinkDiv}
-          onClick={updateNavigation.bind(this, "settings")}
+          onClick={() => dispatch(updateNavigation("settings"))}
         >
           <img
             className={"icon"}
@@ -34,11 +43,6 @@ const Header = ({ activeNavigationState, updateNavigation }) => {
       </div>
     </div>
   );
-};
-
-Header.propTypes = {
-  activeNavigationState: PropTypes.string.isRequired,
-  updateNavigation: PropTypes.func.isRequired,
 };
 
 export default Header;

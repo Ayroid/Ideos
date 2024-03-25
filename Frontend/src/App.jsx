@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -15,21 +14,9 @@ import Header from "./components/Header/Header";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 
 function App() {
-  const [activeNavigationState, setActiveNavigationState] = useState("home");
-
-  const updateNavigation = (navLink) => {
-    if (navLink === activeNavigationState) {
-      return;
-    }
-    setActiveNavigationState(navLink);
-  };
-
   return (
     <div className="homeContainer">
-      <Header
-        activeNavigationState={activeNavigationState}
-        updateNavigation={updateNavigation}
-      />
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/apps" element={<AppsPage />} />
@@ -39,10 +26,7 @@ function App() {
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
-      <Navigation
-        activeNavigationState={activeNavigationState}
-        updateNavigation={updateNavigation}
-      />
+      <Navigation />
     </div>
   );
 }
