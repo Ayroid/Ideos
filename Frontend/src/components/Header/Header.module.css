@@ -5,7 +5,6 @@
   box-sizing: border-box;
   width: 100%;
   height: 10dvh;
-  padding-inline: 6dvw;
   font-family: "Righteous", sans-serif;
 }
 
@@ -21,6 +20,7 @@
 .logo {
   font-weight: 500;
   font-size: 1.8rem;
+  color: var(--accentColor);
 }
 
 .icons {

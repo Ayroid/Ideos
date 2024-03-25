@@ -1,0 +1,19 @@
+.mainDiv {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 60dvh;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1;
+  position: absolute;
+  background-color: var(--dullBackground);
+}
+
+.addIdeosForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+}

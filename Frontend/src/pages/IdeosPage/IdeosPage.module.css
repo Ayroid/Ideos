@@ -1,5 +1,6 @@
 .mainDiv {
   font-family: "Dongle", cursive;
+  height: 70dvh;
   width: 100%;
 }
 
@@ -24,13 +25,10 @@
 }
 
 .noIdeos {
-  font-family: "Righteous", cursive;
-  rotate: -90deg;
-  height: 55dvh;
-  width: 100%;
+  font-family: "Righteous", sans-serif;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   color: var(--dullColor);
-  font-size: 5rem;
+  font-size: 2rem;
 }
