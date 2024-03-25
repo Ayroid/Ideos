@@ -4,7 +4,7 @@ import Header from "../../components/Header/Header";
 
 import CRUDButton from "../../components/CRUDButton/CRUDButton";
 import styles from "./IdeosPage.module.css";
-// import AddIdeos from "../../sections/AddIdeos/AddIdeos";
+import AddIdeos from "../../sections/AddIdeos/AddIdeos";
 
 const { mainDiv, pageHeader, pageHeading, noIdeos } = styles;
 
@@ -20,7 +20,7 @@ const IdeosPage = ({ data }) => {
   return (
     <div className="pageContainer">
       <Header />
-      {/* <AddIdeos /> */}
+      <AddIdeos />
       <div className={mainDiv}>
         <div className={pageHeader}>
           <p className={pageHeading}>

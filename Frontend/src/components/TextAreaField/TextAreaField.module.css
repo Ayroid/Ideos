@@ -1,38 +1,43 @@
-.formInputDiv {
+.textAreaDiv {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.formInput {
+.textArea {
   box-sizing: border-box;
   padding: 0.5rem 1rem;
   font-size: 1.5rem;
   width: 100%;
-  height: 3.2rem;
+  height: 10rem;
   color: var(--lightText);
   background-color: var(--darkText);
   font-weight: 600;
   transition: 0.1s ease-out;
   border: none;
   outline: none;
+  resize: none;
   border-radius: 10px;
   font-family: "Dongle", sans-serif;
 }
 
-.formInput:-webkit-autofill,
-.formInput:-webkit-autofill:hover,
-.formInput:-webkit-autofill:focus,
-.formInput:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px var(--eventDescBg) inset !important;
-  -webkit-text-fill-color: var(--textDark) !important;
+.textArea:-webkit-autofill,
+.textArea:-webkit-autofill:hover,
+.textArea:-webkit-autofill:focus,
+.textArea:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #404053 inset !important;
+  -webkit-text-fill-color: var(--text) !important;
 }
 
-.formInput:focus {
+.textArea::-webkit-scrollbar {
+  display: none;
+}
+
+.textArea:focus {
   outline: none;
 }
 
-.formInput::placeholder {
+.textArea::placeholder {
   font-weight: 600;
   color: var(--lightText);
 }

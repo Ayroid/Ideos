@@ -1,29 +1,14 @@
-.mainDiv {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  width: 100%;
-  height: 10dvh;
-  padding-inline: 6dvw;
-}
-
-.navLinkDiv {
-  height: 30px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.logo {
+.crudButton {
   font-weight: 900;
-  font-size: 1.8rem;
-}
-
-.icons {
-  display: flex;
-  justify-content: space-between;
-  width: 25%;
+  font-size: 2rem;
+  border: none;
+  border-radius: 10px;
+  padding-top: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  font-family: "Dongle", sans-serif;
+  &:active {
+    opacity: 0.75;
+    transition: background-color 0.15s;
+  }
 }

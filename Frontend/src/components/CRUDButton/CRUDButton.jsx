@@ -1,4 +1,7 @@
+import styles from "./CRUDButton.module.css";
 import PropTypes from "prop-types";
+
+const { crudButton } = styles;
 
 const CRUDButton = ({
   backgroundColor = "var(--accentColor)",
@@ -9,7 +12,7 @@ const CRUDButton = ({
 }) => {
   return (
     <button
-      className="crudButton"
+      className={crudButton}
       style={{ backgroundColor, color, width }}
       onClick={action}
     >

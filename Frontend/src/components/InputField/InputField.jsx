@@ -12,22 +12,23 @@ const InputField = ({
   value,
   valueUpdater,
   inputLabel,
+  placeholder,
   required,
 }) => {
   return (
     <div className={formInputDiv}>
+      <label htmlFor={id} className={label}>
+        {inputLabel}
+      </label>
       <input
         id={id}
         className={formInput}
         type={type}
         value={value}
         onChange={valueUpdater}
-        placeholder=""
+        placeholder={placeholder}
         required={required}
       />
-      <label htmlFor={id} className={label}>
-        {inputLabel}
-      </label>
     </div>
   );
 };
@@ -38,6 +39,7 @@ InputField.propTypes = {
   value: PropTypes.string.isRequired,
   valueUpdater: PropTypes.func.isRequired,
   inputLabel: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
   required: PropTypes.bool.isRequired,
 };
 
