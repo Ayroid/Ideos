@@ -1,0 +1,15 @@
+certbot.sh
+connectideos.sh
+deployBackend.sh
+deployFrontend.sh
+deployServer.sh
+docker-compose.yml
+dockerSetup.sh
+fileCopy.sh
+ideos.pem
+updateServer.sh
+
+Frontend/nginx.conf
+Frontend/Dockerfile
+Frontend/.env
+Frontend/.dockerignore
