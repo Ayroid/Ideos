@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import styles from "./AddIdeos.module.css";
 
@@ -7,7 +8,7 @@ import TextAreaField from "../../components/TextAreaField/TextAreaField";
 
 const { mainDiv, addIdeosForm, formHeading, ideosButtons } = styles;
 
-const AddIdeos = () => {
+const AddIdeos = ({ hideAddIdeos }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -65,21 +66,18 @@ const AddIdeos = () => {
             width="46%"
             backgroundColor="var(--darkBg)"
             color="var(--lightText)"
-            action={() => {
-              alert("Cancel!");
-            }}
+            action={hideAddIdeos}
           />
-          <CRUDButton
-            text={"DONE"}
-            width="46%"
-            action={() => {
-              alert("Done!");
-            }}
-          />
+          <CRUDButton text={"DONE"} width="46%" action={hideAddIdeos} />
         </div>
       </div>
     </div>
   );
+};
+
+AddIdeos.propTypes = {
+  hideAddIdeos: PropTypes.func.isRequired,
+  showAddIdeos: PropTypes.func.isRequired,
 };
 
 export default AddIdeos;

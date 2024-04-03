@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Proptypes from "prop-types";
 
 import Header from "../../components/Header/Header";
@@ -17,10 +18,23 @@ const IdeosScreen = () => {
 };
 
 const IdeosPage = ({ data }) => {
+  // SHOW ADD IDEOS SECTION STATE
+  const [showAddIdeos, setShowAddIdeos] = useState(false);
+
+  // UPDATER FUNCTIONS
+
+  const hideAddIdeosComp = () => {
+    setShowAddIdeos(false);
+  };
+
+  const showAddIdeosComp = () => {
+    setShowAddIdeos(true);
+  };
+
   return (
     <div className="pageContainer">
       <Header />
-      <AddIdeos />
+      {showAddIdeos && <AddIdeos hideAddIdeos={hideAddIdeosComp} />}
       <div className={mainDiv}>
         <div className={pageHeader}>
           <p className={pageHeading}>
@@ -30,12 +44,7 @@ const IdeosPage = ({ data }) => {
         </div>
         {data ? <IdeosScreen /> : <BlankScreen />}
       </div>
-      <CRUDButton
-        text={"ADD IDEOS"}
-        action={() => {
-          alert("Add Ideos!");
-        }}
-      />
+      <CRUDButton text={"ADD IDEOS"} action={showAddIdeosComp} />
     </div>
   );
 };
