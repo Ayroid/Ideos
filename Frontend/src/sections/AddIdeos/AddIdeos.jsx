@@ -54,7 +54,7 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
         }, 300);
       }
     }
-  }, [showAddIdeos]);
+  }, [showAddIdeos, initalLoad]);
 
   return (
     <div className={mainDiv} id="addIdeosComp">
