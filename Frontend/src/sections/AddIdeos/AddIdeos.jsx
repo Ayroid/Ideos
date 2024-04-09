@@ -1,14 +1,23 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AddIdeos.module.css";
 
 import CRUDButton from "../../components/CRUDButton/CRUDButton";
 import InputField from "../../components/InputField/InputField";
 import TextAreaField from "../../components/TextAreaField/TextAreaField";
 
-const { mainDiv, addIdeosForm, formHeading, ideosButtons } = styles;
+const {
+  mainDiv,
+  addIdeosForm,
+  formHeading,
+  ideosButtons,
+  showMainAnimation,
+  hideMainAnimation,
+  scrollUpAnimation,
+  scrollDownAnimation,
+} = styles;
 
-const AddIdeos = ({ hideAddIdeos }) => {
+const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -20,9 +29,31 @@ const AddIdeos = ({ hideAddIdeos }) => {
     setDescription(e.target.value);
   };
 
+  useEffect(() => {
+    const ideosMainDiv = document.getElementById("addIdeosComp");
+    const addIdeosForm = document.getElementById("addIdeosForm");
+    if (showAddIdeos) {
+      ideosMainDiv.style.display = "flex";
+      ideosMainDiv.classList.remove(hideMainAnimation);
+      ideosMainDiv.classList.add(showMainAnimation);
+      addIdeosForm.classList.remove(scrollDownAnimation);
+      addIdeosForm.classList.add(scrollUpAnimation);
+    } else {
+      ideosMainDiv.classList.remove(showMainAnimation);
+      ideosMainDiv.classList.add(hideMainAnimation);
+      addIdeosForm.classList.remove(scrollUpAnimation);
+      addIdeosForm.classList.add(scrollDownAnimation);
+      setTimeout(() => {
+        ideosMainDiv.style.display = "none";
+        ideosMainDiv.classList.remove(hideMainAnimation);
+        addIdeosForm.classList.remove(scrollDownAnimation);
+      }, 300);
+    }
+  }, [showAddIdeos]);
+
   return (
     <div className={mainDiv} id="addIdeosComp">
-      <div className={addIdeosForm}>
+      <div className={addIdeosForm} id="addIdeosForm">
         <h6 className={formHeading}>New Ideo</h6>
         <InputField
           id="ideosTitle"
@@ -76,6 +107,7 @@ const AddIdeos = ({ hideAddIdeos }) => {
 };
 
 AddIdeos.propTypes = {
+  showAddIdeos: PropTypes.bool.isRequired,
   hideAddIdeos: PropTypes.func.isRequired,
 };
 

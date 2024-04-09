@@ -34,7 +34,7 @@ const IdeosPage = ({ data }) => {
   return (
     <div className="pageContainer">
       <Header />
-      {showAddIdeos && <AddIdeos hideAddIdeos={hideAddIdeosComp} />}
+      <AddIdeos showAddIdeos={showAddIdeos} hideAddIdeos={hideAddIdeosComp} />
       <div className={mainDiv}>
         <div className={pageHeader}>
           <p className={pageHeading}>
