@@ -8,7 +8,17 @@
   z-index: 1;
   position: absolute;
   background-color: var(--dullBackground);
+  animation: fadeInBg 0.5s ease-in-out;
   overflow-y: hidden;
+}
+
+@keyframes fadeInBg {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: var(--dullBackground);
+  }
 }
 
 .addIdeosForm {
@@ -27,7 +37,7 @@
 
 @keyframes scrollUp {
   0% {
-    opacity: 0,5;
+    opacity: 0, 5;
     transform: translateY(100%);
   }
   100% {
