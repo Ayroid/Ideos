@@ -25,11 +25,6 @@ const IdeosPage = ({ data }) => {
 
   const showAddIdeosComp = () => {
     setShowAddIdeos(true);
-    const addIdeosDiv = document.getElementById("addIdeosComp");
-    console.log(addIdeosDiv);
-    if (addIdeosDiv) {
-      addIdeosDiv.classList.add("smoothSlideUpAnimation");
-    }
   };
 
   const hideAddIdeosComp = () => {

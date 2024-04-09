@@ -8,6 +8,7 @@
   z-index: 1;
   position: absolute;
   background-color: var(--dullBackground);
+  overflow-y: hidden;
 }
 
 .addIdeosForm {
@@ -26,9 +27,11 @@
 
 @keyframes scrollUp {
   0% {
+    opacity: 0,5;
     transform: translateY(100%);
   }
   100% {
+    opacity: 1;
     transform: translateY(0);
   }
 }
