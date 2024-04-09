@@ -16,7 +16,6 @@ import SettingsPage from "./pages/SettingsPage/SettingsPage";
 function App() {
   return (
     <div className="homeContainer">
-      {/* <Header /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/apps" element={<AppsPage />} />

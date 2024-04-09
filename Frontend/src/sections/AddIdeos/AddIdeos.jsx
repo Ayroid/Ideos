@@ -21,7 +21,7 @@ const AddIdeos = ({ hideAddIdeos }) => {
   };
 
   return (
-    <div className={mainDiv}>
+    <div className={mainDiv} id="addIdeosComp">
       <div className={addIdeosForm}>
         <h6 className={formHeading}>New Ideo</h6>
         <InputField
@@ -77,7 +77,6 @@ const AddIdeos = ({ hideAddIdeos }) => {
 
 AddIdeos.propTypes = {
   hideAddIdeos: PropTypes.func.isRequired,
-  showAddIdeos: PropTypes.func.isRequired,
 };
 
 export default AddIdeos;

@@ -23,12 +23,17 @@ const IdeosPage = ({ data }) => {
 
   // UPDATER FUNCTIONS
 
-  const hideAddIdeosComp = () => {
-    setShowAddIdeos(false);
-  };
-
   const showAddIdeosComp = () => {
     setShowAddIdeos(true);
+    const addIdeosDiv = document.getElementById("addIdeosComp");
+    console.log(addIdeosDiv);
+    if (addIdeosDiv) {
+      addIdeosDiv.classList.add("smoothSlideUpAnimation");
+    }
+  };
+
+  const hideAddIdeosComp = () => {
+    setShowAddIdeos(false);
   };
 
   return (

@@ -21,6 +21,16 @@
   border-radius: 10px 10px 0 0;
   padding: 6dvw 6dvw 0 6dvw;
   z-index: 2;
+  animation: scrollUp 0.5s ease-in-out;
+}
+
+@keyframes scrollUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .formHeading {
