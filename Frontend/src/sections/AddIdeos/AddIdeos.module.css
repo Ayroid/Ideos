@@ -1,5 +1,5 @@
 .mainDiv {
-  display: flex;
+  display: none;
   justify-content: flex-start;
   align-items: flex-end;
   height: 92dvh;

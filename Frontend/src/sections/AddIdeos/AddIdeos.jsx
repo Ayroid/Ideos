@@ -20,6 +20,7 @@ const {
 const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [initalLoad, setInitalLoad] = useState(true);
 
   const updateTitle = (e) => {
     setTitle(e.target.value);
@@ -30,24 +31,28 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
   };
 
   useEffect(() => {
-    const ideosMainDiv = document.getElementById("addIdeosComp");
-    const addIdeosForm = document.getElementById("addIdeosForm");
-    if (showAddIdeos) {
-      ideosMainDiv.style.display = "flex";
-      ideosMainDiv.classList.remove(hideMainAnimation);
-      ideosMainDiv.classList.add(showMainAnimation);
-      addIdeosForm.classList.remove(scrollDownAnimation);
-      addIdeosForm.classList.add(scrollUpAnimation);
+    if (initalLoad) {
+      setInitalLoad(false);
     } else {
-      ideosMainDiv.classList.remove(showMainAnimation);
-      ideosMainDiv.classList.add(hideMainAnimation);
-      addIdeosForm.classList.remove(scrollUpAnimation);
-      addIdeosForm.classList.add(scrollDownAnimation);
-      setTimeout(() => {
-        ideosMainDiv.style.display = "none";
+      const ideosMainDiv = document.getElementById("addIdeosComp");
+      const addIdeosForm = document.getElementById("addIdeosForm");
+      if (showAddIdeos) {
+        ideosMainDiv.style.display = "flex";
         ideosMainDiv.classList.remove(hideMainAnimation);
+        ideosMainDiv.classList.add(showMainAnimation);
         addIdeosForm.classList.remove(scrollDownAnimation);
-      }, 300);
+        addIdeosForm.classList.add(scrollUpAnimation);
+      } else {
+        ideosMainDiv.classList.remove(showMainAnimation);
+        ideosMainDiv.classList.add(hideMainAnimation);
+        addIdeosForm.classList.remove(scrollUpAnimation);
+        addIdeosForm.classList.add(scrollDownAnimation);
+        setTimeout(() => {
+          ideosMainDiv.style.display = "none";
+          ideosMainDiv.classList.remove(hideMainAnimation);
+          addIdeosForm.classList.remove(scrollDownAnimation);
+        }, 300);
+      }
     }
   }, [showAddIdeos]);
 
