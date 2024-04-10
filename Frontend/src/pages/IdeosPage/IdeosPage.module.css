@@ -1,7 +1,12 @@
-.mainDiv {
+.ideosPageMainDiv {
   font-family: "Dongle", cursive;
-  height: 100%;
+  height: calc(100% - 18dvh);
   width: 100%;
+  overflow-y: hidden;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 .pageHeader {
@@ -9,7 +14,7 @@
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  height: 15dvh;
+  height: 12dvh;
 }
 
 .pageHeading {
@@ -26,8 +31,15 @@
 .noIdeos {
   font-family: "Righteous", sans-serif;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
+  flex-direction: column;
+  box-sizing: border-box;
   color: var(--dullColor);
+  gap: 1rem;
+  width: 100%;
   font-size: 2rem;
+  height: 100%;
+  overflow-y: scroll;
+  margin-top: 1rem;
 }

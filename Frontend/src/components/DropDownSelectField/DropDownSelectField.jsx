@@ -32,7 +32,7 @@ const DropDownSelectField = ({
           {defaultOption}
         </option>
         {options.map((option) => (
-          <option key={option.toLowerCase()} value={option.toLowerCase()}>
+          <option key={option} value={option}>
             {option}
           </option>
         ))}

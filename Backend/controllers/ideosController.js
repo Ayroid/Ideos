@@ -104,7 +104,7 @@ const readIdeos = async (req, res) => {
   try {
     const query = req.query.id ? { _id: req.query.id } : {};
 
-    const record = await READ_DB(IDEOSMODEL, query, fields);
+    const record = await READ_DB(IDEOSMODEL, query);
 
     if (record.length > 0) {
       console.log("Ideos Found", { record });

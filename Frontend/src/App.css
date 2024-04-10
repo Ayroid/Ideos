@@ -1,14 +1,16 @@
 /* FONTS */
-@import url("https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Biryani:wght@200;300;400;600;700;800;900&family=Righteous&display=swap");
 
 :root {
   --lightBg: #f5f7ef;
   --darkBg: #131313;
   --lightText: #f5f7ef;
   --darkText: #131313;
-  --accentColor: #baff4c;
   --dullColor: #d6d8d0;
   --dullBackground: #00000040;
+  --accentColor: #baff4c;
+  --mediumAccentColor: #000000;
+  --lowAccentColor: #fc9e2f;
 }
 
 * {

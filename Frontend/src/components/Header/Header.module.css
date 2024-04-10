@@ -21,6 +21,9 @@
   font-weight: 500;
   font-size: 1.8rem;
   color: var(--accentColor);
+  background-color: var(--darkBg);
+  padding: 0.25rem 1rem;
+  border-radius: 25px;
 }
 
 .icons {
