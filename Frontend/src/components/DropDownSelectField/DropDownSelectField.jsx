@@ -17,6 +17,9 @@ const DropDownSelectField = ({
 }) => {
   return (
     <div className={dropDownSelectDiv}>
+      <label htmlFor={id} className={label}>
+        {inputLabel}
+      </label>
       <select
         className={dropDownSelect}
         value={value}
@@ -34,9 +37,6 @@ const DropDownSelectField = ({
           </option>
         ))}
       </select>
-      <label htmlFor={id} className={label}>
-        {inputLabel}
-      </label>
     </div>
   );
 };

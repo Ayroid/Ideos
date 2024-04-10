@@ -4,6 +4,7 @@ import styles from "./AddIdeos.module.css";
 
 import CRUDButton from "../../components/CRUDButton/CRUDButton";
 import InputField from "../../components/InputField/InputField";
+import DropDownSelectField from "../../components/DropDownSelectField/DropDownSelectField";
 import TextAreaField from "../../components/TextAreaField/TextAreaField";
 
 const {
@@ -18,9 +19,15 @@ const {
 } = styles;
 
 const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
+  const [category, setCategory] = useState("Choose");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState("Low");
   const [initalLoad, setInitalLoad] = useState(true);
+
+  const updateCategory = (e) => {
+    setCategory(e.target.value);
+  };
 
   const updateTitle = (e) => {
     setTitle(e.target.value);
@@ -28,6 +35,10 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
 
   const updateDescription = (e) => {
     setDescription(e.target.value);
+  };
+
+  const updatePriority = (e) => {
+    setPriority(e.target.value);
   };
 
   useEffect(() => {
@@ -60,14 +71,14 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
     <div className={mainDiv} id="addIdeosComp">
       <div className={addIdeosForm} id="addIdeosForm">
         <h6 className={formHeading}>New Ideo</h6>
-        <InputField
-          id="ideosTitle"
-          type="text"
-          value={title}
-          valueUpdater={updateTitle}
+        <DropDownSelectField
+          id="ideosCategory"
+          value={category}
+          valueUpdater={updateCategory}
           inputLabel="Category"
-          placeholder="Choose"
           required={true}
+          options={["Tech", "Health", "Finance", "Education"]}
+          defaultOption="Choose"
         />
         <InputField
           id="ideosTitle"
@@ -87,14 +98,14 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
           placeholder="Describe your ideos"
           inputLabel="Description"
         />
-        <InputField
-          id="ideosTitle"
-          type="text"
-          value={title}
-          valueUpdater={updateTitle}
-          inputLabel="Category"
-          placeholder="Choose"
+        <DropDownSelectField
+          id="ideosPriority"
+          value={priority}
+          valueUpdater={updatePriority}
+          inputLabel="Priority"
           required={true}
+          options={["Low", "Medium", "High"]}
+          defaultOption="Low"
         />
         <div className={ideosButtons}>
           <CRUDButton
