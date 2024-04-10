@@ -1,3 +1,4 @@
+import axios from "axios";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import styles from "./AddIdeos.module.css";
@@ -7,9 +8,11 @@ import InputField from "../../components/InputField/InputField";
 import DropDownSelectField from "../../components/DropDownSelectField/DropDownSelectField";
 import TextAreaField from "../../components/TextAreaField/TextAreaField";
 import SelectionSwitch from "../../components/SelectionSwitch/SelectionSwitch";
+import FormLoading from "../../components/FormLoading/FormLoading";
 
 const {
   mainDiv,
+  loadingDiv,
   addIdeosForm,
   formHeading,
   ideosButtons,
@@ -20,26 +23,27 @@ const {
 } = styles;
 
 const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
-  const [category, setCategory] = useState("Choose");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState("Low");
+  const [loading, setLoading] = useState(false);
+  const [ideosCategory, setIdeosCategory] = useState("Choose");
+  const [ideosTitle, setIdeosTitle] = useState("");
+  const [ideosDescription, setIdeosDescription] = useState("");
+  const [ideosPriority, setIdeosPriority] = useState("Low");
   const [initalLoad, setInitalLoad] = useState(true);
 
-  const updateCategory = (e) => {
-    setCategory(e.target.value);
+  const updateIdeosCategory = (e) => {
+    setIdeosCategory(e.target.value);
   };
 
-  const updateTitle = (e) => {
-    setTitle(e.target.value);
+  const updateIdeosTitle = (e) => {
+    setIdeosTitle(e.target.value);
   };
 
-  const updateDescription = (e) => {
-    setDescription(e.target.value);
+  const updateIdeosDescription = (e) => {
+    setIdeosDescription(e.target.value);
   };
 
-  const updatePriority = (option) => {
-    setPriority(option);
+  const updateIdeosPriority = (option) => {
+    setIdeosPriority(option);
   };
 
   useEffect(() => {
@@ -68,24 +72,62 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
     }
   }, [showAddIdeos, initalLoad]);
 
+  const addNewIdeos = () => {
+    setLoading(true);
+
+    if (
+      ideosCategory === "Choose" ||
+      ideosTitle === "" ||
+      ideosDescription === ""
+    ) {
+      setLoading(false);
+      return;
+    }
+
+    const formData = {
+      ideosCategory,
+      ideosTitle,
+      ideosDescription,
+      ideosPriority,
+    };
+
+    axios
+      .post(`${import.meta.env.VITE_SERVER_URL}/ideos`, formData)
+      .then((response) => {
+        console.log(response.data);
+        hideAddIdeos();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   return (
     <div className={mainDiv} id="addIdeosComp">
+      {loading && (
+        <div className={loadingDiv}>
+          <FormLoading />
+        </div>
+      )}
       <div className={addIdeosForm} id="addIdeosForm">
         <h6 className={formHeading}>New Ideo</h6>
         <DropDownSelectField
           id="ideosCategory"
-          value={category}
-          valueUpdater={updateCategory}
+          value={ideosCategory}
+          valueUpdater={updateIdeosCategory}
           inputLabel="Category"
           required={true}
-          options={["Tech", "Health", "Finance", "Education"]}
+          options={["Project", "DevOps", "Cloud", "UI/UX", "Cyber", "Linux"]}
           defaultOption="Choose"
         />
         <InputField
           id="ideosTitle"
           type="text"
-          value={title}
-          valueUpdater={updateTitle}
+          value={ideosTitle}
+          valueUpdater={updateIdeosTitle}
           inputLabel="Title"
           placeholder="Ideos Title"
           required={true}
@@ -94,16 +136,16 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
           cols="30"
           rows="30"
           id="ideosDesc"
-          value={description}
-          valueUpdater={updateDescription}
+          value={ideosDescription}
+          valueUpdater={updateIdeosDescription}
           placeholder="Describe your ideos"
           inputLabel="Description"
         />
         <SelectionSwitch
           id="ideosPriority"
           inputLabel="Priority"
-          value={priority}
-          valueUpdater={updatePriority}
+          value={ideosPriority}
+          valueUpdater={updateIdeosPriority}
           options={["Low", "Medium", "High"]}
         />
         <div className={ideosButtons}>
@@ -114,7 +156,7 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
             color="var(--lightText)"
             action={hideAddIdeos}
           />
-          <CRUDButton text={"DONE"} width="46%" action={hideAddIdeos} />
+          <CRUDButton text={"DONE"} width="46%" action={addNewIdeos} />
         </div>
       </div>
     </div>
