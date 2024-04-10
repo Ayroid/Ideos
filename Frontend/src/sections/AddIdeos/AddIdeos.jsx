@@ -6,6 +6,7 @@ import CRUDButton from "../../components/CRUDButton/CRUDButton";
 import InputField from "../../components/InputField/InputField";
 import DropDownSelectField from "../../components/DropDownSelectField/DropDownSelectField";
 import TextAreaField from "../../components/TextAreaField/TextAreaField";
+import SelectionSwitch from "../../components/SelectionSwitch/SelectionSwitch";
 
 const {
   mainDiv,
@@ -37,8 +38,8 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
     setDescription(e.target.value);
   };
 
-  const updatePriority = (e) => {
-    setPriority(e.target.value);
+  const updatePriority = (option) => {
+    setPriority(option);
   };
 
   useEffect(() => {
@@ -98,14 +99,12 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
           placeholder="Describe your ideos"
           inputLabel="Description"
         />
-        <DropDownSelectField
+        <SelectionSwitch
           id="ideosPriority"
+          inputLabel="Priority"
           value={priority}
           valueUpdater={updatePriority}
-          inputLabel="Priority"
-          required={true}
           options={["Low", "Medium", "High"]}
-          defaultOption="Low"
         />
         <div className={ideosButtons}>
           <CRUDButton

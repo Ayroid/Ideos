@@ -44,5 +44,9 @@
   font-weight: 600;
   transition: 0.1s ease-out;
   pointer-events: none;
-  padding: -0.25rem;
+  margin-bottom: -0.25rem;
+}
+
+.dropDownSelect option {
+  border-radius: 5px; /* Adjust the radius as desired */
 }

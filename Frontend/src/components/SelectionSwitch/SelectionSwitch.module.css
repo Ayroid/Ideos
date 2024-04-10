@@ -1,3 +1,54 @@
-.mainDiv {
+.selectionSwitchDiv {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+}
+
+.selectionSwitchOptions {
+  box-sizing: border-box;
+  padding: 0.35rem 0.5rem;
+  font-size: 1.5rem;
+  width: 100%;
+  height: 3.2rem;
+  color: var(--lightText);
+  background-color: var(--darkText);
+  font-weight: 600;
+  transition: 0.1s ease-out;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  font-family: "Dongle", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  gap: 2dvw;
+}
+
+.selectionSwitchOptions:-webkit-autofill,
+.selectionSwitchOptions:-webkit-autofill:hover,
+.selectionSwitchOptions:-webkit-autofill:focus,
+.selectionSwitchOptions:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--eventDescBg) inset !important;
+  -webkit-text-fill-color: var(--textDark) !important;
+}
+
+.selectionSwitchOption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.selectionSwitchActive {
+  background-color: var(--accentColor);
+  color: var(--darkText);
+}
+
+.label {
+  font-size: 1.5rem;
+  background-color: transparent;
+  color: var(--lightDark);
+  font-weight: 600;
+  transition: 0.1s ease-out;
+  pointer-events: none;
+  margin-bottom: -0.25rem;
 }
