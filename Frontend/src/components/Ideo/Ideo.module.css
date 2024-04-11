@@ -4,7 +4,7 @@
   align-items: flex-start;
   flex-direction: column;
   box-sizing: border-box;
-  min-height: 200px;
+  height: 100%;
   width: 100%;
   border-radius: 10px;
   padding: 1rem;
@@ -30,6 +30,10 @@
   font-weight: 600;
 }
 
+.ideoContent {
+  padding-bottom: 2rem;
+}
+
 .ideoTitle {
   font-size: 1.5rem;
   padding: 0;
@@ -43,13 +47,14 @@
 }
 
 .ideoMetaData {
-  height: 2.5rem;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   font-weight: 600;
   font-size: 0.9rem;
+  position: absolute;
+  bottom: 0;
+  margin-block: 0.75rem;
 }
 
 .ideoDate {
