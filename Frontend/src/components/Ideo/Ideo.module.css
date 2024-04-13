@@ -22,7 +22,7 @@
 }
 
 .ideoTag {
-  padding: 0.25rem 1.25rem;
+  padding: 0.2rem 1rem 0 1rem;
   font-size: 0.9rem;
   border-radius: 25px;
   background-color: var(--lightBg);
@@ -35,7 +35,7 @@
 }
 
 .ideoTitle {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   padding: 0;
   margin: 0;
   margin-top: 0.5rem;
@@ -71,6 +71,6 @@
 
 .ideoPinIcon {
   position: absolute;
-  height: 1.75rem;
-  right: 1rem;
+  height: 1.5rem;
+  right: 0.5rem;
 }

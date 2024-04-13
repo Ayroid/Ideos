@@ -56,7 +56,7 @@ const Ideo = ({ ideo }) => {
         </div>
       </div>
 
-      <img className={ideoPinIcon} src="/icons/blank-pin.png" alt="blankpin" />
+      <img className={ideoPinIcon} src="/icons/three-dots.png" alt="three-dots" />
     </div>
   );
 };
