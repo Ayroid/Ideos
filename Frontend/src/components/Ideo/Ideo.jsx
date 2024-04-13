@@ -35,6 +35,7 @@ const Ideo = ({ ideo }) => {
         : "var(--lowAccentColor)",
     color:
       ideo.ideosPriority === "High" ? "var(--darkText)" : "var(--lightText)",
+    iconFilter: ideo.ideosPriority === "Medium" ? "invert(1)" : "invert(0)",
   };
 
   const [dropDownVisible, setDropDownVisible] = useState(false);
@@ -109,7 +110,12 @@ const Ideo = ({ ideo }) => {
       </div>
       <div className={ideoMetaData}>
         <div className={ideoDate}>
-          <img className={ideoIcons} src="/icons/calendar.png" alt="calendar" />
+          <img
+            className={ideoIcons}
+            src="/icons/calendar.png"
+            alt="calendar"
+            style={{ filter: colorScheme.iconFilter }}
+          />
           {new Date(ideo.createdAt).toLocaleDateString("en-GB", {
             day: "numeric",
             month: "short",
@@ -123,6 +129,7 @@ const Ideo = ({ ideo }) => {
         src="/icons/three-dots.png"
         alt="three-dots"
         onClick={showdDropDownMenu}
+        style={{ filter: colorScheme.iconFilter }}
       />
 
       <div className={dropDownMenu} id={"dropDownMenu" + ideo._id}>
