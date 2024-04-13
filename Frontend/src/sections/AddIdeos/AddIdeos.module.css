@@ -5,7 +5,7 @@
   height: 92dvh;
   width: 100%;
   box-sizing: border-box;
-  z-index: 1;
+  z-index: 9;
   position: absolute;
   overflow-y: hidden;
 }
@@ -48,7 +48,7 @@
   background-color: var(--lightBg);
   border-radius: 10px 10px 0 0;
   padding: 6dvw 6dvw 0 6dvw;
-  z-index: 2;
+  z-index: 10;
 }
 
 .scrollUpAnimation {

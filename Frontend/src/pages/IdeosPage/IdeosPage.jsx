@@ -35,10 +35,6 @@ const IdeosPage = () => {
     url: `${import.meta.env.VITE_SERVER_URL}/ideos/`,
   });
 
-  if (loading) {
-    return <Loading />;
-  }
-
   // UPDATER FUNCTIONS
 
   const showAddIdeosComp = () => {
@@ -60,7 +56,13 @@ const IdeosPage = () => {
           </p>
           <img className="icon" src="/icons/categories.png" alt="categories" />
         </div>
-        {data ? <IdeosScreen ideos={data} /> : <BlankScreen />}
+        {loading ? (
+          <Loading />
+        ) : data ? (
+          <IdeosScreen ideos={data} />
+        ) : (
+          <BlankScreen />
+        )}
       </div>
       <CRUDButton text={"ADD IDEOS"} action={showAddIdeosComp} />
     </div>
