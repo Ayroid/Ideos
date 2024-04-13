@@ -1,5 +1,7 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Ideo.module.css";
+import axios from "axios";
 
 const {
   ideoDiv,
@@ -12,10 +14,17 @@ const {
   ideoDate,
   ideoIcons,
   ideoPinIcon,
+  dropDownMenu,
+  dropDownMenuList,
+  dropDownMenuListItem,
+  dropDownAnimation,
+  dropDownCloseAnimation,
 } = styles;
 
+import FormLoading from "../FormLoading/FormLoading";
+
 const Ideo = ({ ideo }) => {
-  console.log(ideo);
+  const [loading, setLoading] = useState(false);
 
   const colorScheme = {
     backgroundColor:
@@ -28,6 +37,53 @@ const Ideo = ({ ideo }) => {
       ideo.ideosPriority === "High" ? "var(--darkText)" : "var(--lightText)",
   };
 
+  const [dropDownVisible, setDropDownVisible] = useState(false);
+
+  const showDropDown = () => {
+    if (!dropDownVisible) {
+      const dropDownMenu = document.getElementById("dropDownMenu" + ideo._id);
+      dropDownMenu.style.display = "block";
+      dropDownMenu.classList.remove(dropDownCloseAnimation);
+      dropDownMenu.classList.add(dropDownAnimation);
+      setDropDownVisible(true);
+    }
+  };
+
+  const hideDropDown = () => {
+    if (dropDownVisible) {
+      const dropDownMenu = document.getElementById("dropDownMenu" + ideo._id);
+      dropDownMenu.classList.remove(dropDownAnimation);
+      dropDownMenu.classList.add(dropDownCloseAnimation);
+      setTimeout(() => {
+        dropDownMenu.style.display = "none";
+        setDropDownVisible(false);
+      }, 200);
+    }
+  };
+
+  const showdDropDownMenu = () => {
+    if (dropDownVisible) {
+      hideDropDown();
+    } else {
+      showDropDown();
+    }
+  };
+
+  const deleteIdeos = () => {
+    setLoading(true);
+    axios
+      .delete(`${import.meta.env.VITE_SERVER_URL}/ideos/${ideo._id}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   return (
     <div
       className={ideoDiv}
@@ -36,7 +92,13 @@ const Ideo = ({ ideo }) => {
         backgroundColor: colorScheme.backgroundColor,
         color: colorScheme.color,
       }}
+      onClick={() => hideDropDown()}
     >
+      {loading && (
+        // <div className={loadingDiv}>
+        <FormLoading />
+        // </div>
+      )}
       <div className={ideoTags}>
         <div className={ideoTag}>{ideo.ideosPriority}</div>
         <div className={ideoTag}>{ideo.ideosCategory}</div>
@@ -56,7 +118,26 @@ const Ideo = ({ ideo }) => {
         </div>
       </div>
 
-      <img className={ideoPinIcon} src="/icons/three-dots.png" alt="three-dots" />
+      <img
+        className={ideoPinIcon}
+        src="/icons/three-dots.png"
+        alt="three-dots"
+        onClick={showdDropDownMenu}
+      />
+
+      <div className={dropDownMenu} id={"dropDownMenu" + ideo._id}>
+        <ul className={dropDownMenuList}>
+          <li className={dropDownMenuListItem}>Edit</li>
+          <li className={dropDownMenuListItem}>Pin</li>
+          <li
+            className={dropDownMenuListItem}
+            style={{ color: "red" }}
+            onClick={deleteIdeos}
+          >
+            Delete
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

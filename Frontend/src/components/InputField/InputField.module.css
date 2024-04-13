@@ -24,7 +24,7 @@
 .formInput:-webkit-autofill:hover,
 .formInput:-webkit-autofill:focus,
 .formInput:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px var(--eventDescBg) inset !important;
+  -webkit-box-shadow: 0 0 0 30px var(--textDark) inset !important;
   -webkit-text-fill-color: var(--textDark) !important;
 }
 

@@ -167,45 +167,6 @@ const deleteIdeosById = async (req, res) => {
     const record = await DELETE_DB_ID(IDEOSMODEL, id);
     if (record) {
       console.log("Ideos Deleted", { record });
-
-      const productCategoryRecord = await READ_DB_ID(
-        PRODUCTCATEGORYMODEL,
-        record.product_category_id
-      );
-
-      if (!productCategoryRecord) {
-        console.log("Ideos Category Not Found", { productCategoryRecord });
-        return res
-          .status(StatusCodes.NOT_FOUND)
-          .send("Ideos Category Not Found");
-      }
-
-      const products = productCategoryRecord.products;
-
-      const updatedProducts = products.filter(
-        (product) => product.toString() !== record._id.toString()
-      );
-
-      const productStockQuantity = productCategoryRecord.product_stock_quantity;
-
-      const updatedProductCategoryRecord = await UPDATE_DB_ID(
-        PRODUCTCATEGORYMODEL,
-        record.product_category_id,
-        {
-          products: updatedProducts,
-          product_stock_quantity:
-            parseInt(productStockQuantity, 10) -
-            parseInt(record.product_stock_quantity, 10),
-        },
-        fields
-      );
-
-      if (updatedProductCategoryRecord) {
-        console.log("Ideos Category Updated", {
-          updatedProductCategoryRecord,
-        });
-      }
-
       return res.status(StatusCodes.OK).send("Ideos Deleted");
     } else {
       console.log("Ideos Not Deleted", { record });
