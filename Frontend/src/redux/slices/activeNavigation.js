@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const activeNavigationSlice = createSlice({
   name: "activeNavigation",
   initialState: {
-    value: "home",
+    value: window.location.pathname.substring(1) || "home",
   },
   reducers: {
     updateNavigation: (state, action) => {
