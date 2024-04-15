@@ -1,9 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
-// COMPONENTS IMPORT
-import Navigation from "./components/Navigation/Navigation";
-
 // PAGES IMPORT
 import IdeosPage from "./pages/IdeosPage/IdeosPage";
 import AppsPage from "./pages/AppsPage/AppsPage";
@@ -12,6 +9,7 @@ import NotificationPage from "./pages/NotificationPage/NotificationPage";
 import HomePage from "./pages/HomePage/HomePage";
 // import Header from "./components/Header/Header";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
+import AuthPage from "./pages/AuthPage/AuthPage";
 
 function App() {
   return (
@@ -23,9 +21,9 @@ function App() {
         <Route path="/notifications" element={<NotificationPage />} />
         <Route path="/ideos" element={<IdeosPage />} />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/auth" element={<AuthPage />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
-      <Navigation />
     </div>
   );
 }

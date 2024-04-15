@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 
 import Header from "../../components/Header/Header";
+import Navigation from "../../components/Navigation/Navigation";
 
 import CRUDButton from "../../components/CRUDButton/CRUDButton";
 import styles from "./IdeosPage.module.css";
@@ -65,6 +66,7 @@ const IdeosPage = () => {
         )}
       </div>
       <CRUDButton text={"ADD IDEOS"} action={showAddIdeosComp} />
+      <Navigation />
     </div>
   );
 };

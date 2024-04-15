@@ -1,6 +1,7 @@
 import styles from "./SettingsPage.module.css";
 
 import Header from "../../components/Header/Header";
+import Navigation from "../../components/Navigation/Navigation";
 
 const { mainDiv } = styles;
 
@@ -11,6 +12,7 @@ const SettingsPage = () => {
       <div className={mainDiv}>
         <h4>Settings</h4>
       </div>
+      <Navigation />
     </div>
   );
 };

@@ -9,7 +9,7 @@
   --dullColor: #d6d8d0;
   --dullBackground: #00000040;
   --accentColor: #baff4c;
-  --mediumAccentColor: #000000;
+  --mediumAccentColor: #131313;
   --lowAccentColor: #fc9e2f;
 }
 
@@ -55,7 +55,7 @@ body {
 }
 
 .pageContainer {
-  height: 92dvh;
+  height: 100dvh;
   width: 100%;
   display: flex;
   justify-content: space-between;

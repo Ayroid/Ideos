@@ -1,0 +1,13 @@
+.mainDiv {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Righteous", cursive;
+}
+
+.logoText {
+  font-weight: 600;
+  rotate: 270deg;
+}
