@@ -15,7 +15,6 @@
 
 * {
   -webkit-tap-highlight-color: transparent;
-  
 }
 
 a:link,
@@ -65,6 +64,20 @@ body {
   font-weight: 500;
   font-size: 3rem;
   padding-inline: 6dvw;
+  box-sizing: border-box;
+  font-family: "Dongle", sans-serif;
+}
+
+.fullWidthContainer {
+  height: 100dvh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  color: var(--darkText);
+  font-weight: 500;
+  font-size: 3rem;
   box-sizing: border-box;
   font-family: "Dongle", sans-serif;
 }
