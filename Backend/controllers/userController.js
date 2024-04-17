@@ -2,7 +2,11 @@ import dotenv from "dotenv";
 dotenv.config();
 import { StatusCodes } from "http-status-codes";
 import { genSalt, hash, compare } from "bcrypt";
-import { GENERATEACCESSTOKEN } from "../middlewares/authentication.js";
+import {
+  GENERATEACCESSTOKEN,
+  GENERATEREFRESHTOKEN,
+  CHECKACCESSTOKEN,
+} from "../middlewares/authentication.js";
 import { SENDMAIL } from "../utils/mailer.js";
 
 // CONSTANTS
@@ -25,7 +29,6 @@ import {
 
 // MODEL IMPORT
 import { USERMODEL } from "../models/userModel.js";
-import { SHOPPINGCARTSMODEL } from "../models/shoppingCartModel.js";
 
 // CONTROLLERS
 const createUser = async (req, res) => {
@@ -53,17 +56,7 @@ const createUser = async (req, res) => {
       // MAKE API CALL TO SEND MAIL
       SENDMAIL(username, email, "REGISTRATION");
 
-      const shoppingCart = await CREATE_DB(SHOPPINGCARTSMODEL, {
-        user_id: user._id,
-      });
-
-      if (shoppingCart) {
-        await UPDATE_DB_ID(USERMODEL, user._id, {
-          shopping_cart: shoppingCart._id,
-        });
-      }
-
-      return res.status(StatusCodes.CREATED).send("User Created");
+      return res.status(StatusCodes.CREATED).send("Account Created");
     } else {
       console.log("Error Creating User", { error });
       return res
@@ -146,16 +139,6 @@ const deleteUserById = async (req, res) => {
     const user = await DELETE_DB_ID(USERMODEL, id);
     if (user) {
       console.log("User Deleted", { user });
-
-      const shoppingCart = await DELETE_DB_ID(
-        SHOPPINGCARTSMODEL,
-        user.shopping_cart
-      );
-
-      if (shoppingCart) {
-        console.log("Shopping Cart Deleted", { shoppingCart });
-      }
-
       return res.status(StatusCodes.OK).send("User Deleted");
     } else {
       console.log("User Not Deleted", { user });
@@ -171,8 +154,8 @@ const deleteUserById = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const email = req.body.email;
-    const query = { email };
+    const usename = req.body.usename;
+    const query = { usename };
     const user = await READ_DB(USERMODEL, query);
     if (user.length > 0) {
       const password = req.body.password;
@@ -182,26 +165,74 @@ const loginUser = async (req, res) => {
         const payload = {
           email: user[0].email,
           id: user[0]._id,
-          is_admin: user[0].is_admin,
         };
         const accessToken = GENERATEACCESSTOKEN(payload);
+        const refreshToken = GENERATEREFRESHTOKEN(payload);
 
         console.log("User Logged In", { user });
         SENDMAIL(user[0].username, user[0].email, "LOGIN");
-        return res.status(StatusCodes.OK).send({ accessToken });
+        return res.status(StatusCodes.OK).send({ accessToken, refreshToken });
       } else {
         console.log("User Not Logged In", { user });
         return res.status(StatusCodes.UNAUTHORIZED).send("User Not Logged In");
       }
     } else {
-      console.log("User Not Found", { user });
-      return res.status(StatusCodes.NOT_FOUND).send("User Not Found");
+      console.log("Account Does Not Exist", { user });
+      return res.status(StatusCodes.NOT_FOUND).send("Account Does Not Exist");
     }
   } catch (error) {
     console.log("Error Logging In User", { error });
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .send("Internal Server Error");
+  }
+};
+
+const verifyToken = async (req, res) => {
+  const token = req.headers["authorization"];
+  if (!token) {
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ message: "Access denied" });
+  }
+  try {
+    const tokenValid = await CHECKACCESSTOKEN(token, "access");
+    if (tokenValid) {
+      return res.status(StatusCodes.OK).send("Token Verified");
+    }
+
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ message: "Invalid token" });
+  } catch (error) {
+    console.log("Error Verifying Token", { error });
+
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ message: "Invalid token" });
+  }
+};
+
+const refreshToken = async (req, res) => {
+  try {
+    const token = req.headers["authorization"];
+    const tokenValid = await CHECKACCESSTOKEN(token, "refresh");
+    if (!tokenValid) {
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ message: "Invalid token" });
+    }
+    const payload = {
+      email: tokenValid.email,
+      id: tokenValid.id,
+    };
+    const accessToken = GENERATEACCESSTOKEN(payload);
+    const refreshToken = GENERATEREFRESHTOKEN(payload);
+    return res.status(StatusCodes.OK).send({ accessToken, refreshToken });
+  } catch (error) {
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ message: "Invalid token" });
   }
 };
 
@@ -212,4 +243,6 @@ export {
   updateUserById as UPDATE_USER_ID,
   deleteUserById as DELETE_USER_ID,
   loginUser as LOGIN_USER,
+  verifyToken as VERIFY_TOKEN,
+  refreshToken as REFRESH_TOKEN,
 };

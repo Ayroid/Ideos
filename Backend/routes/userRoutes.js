@@ -6,6 +6,8 @@ import {
   UPDATE_USER_ID,
   DELETE_USER_ID,
   LOGIN_USER,
+  VERIFY_TOKEN,
+  REFRESH_TOKEN,
 } from "../controllers/userController.js";
 
 const userRouter = express.Router();
@@ -20,6 +22,10 @@ userRouter
 
 userRouter.route("/login").post(LOGIN_USER);
 
-userRouter.route("/register").post(CREATE_USER);
+userRouter.route("/signup").post(CREATE_USER);
+
+userRouter.route("/verify").post(VERIFY_TOKEN);
+
+userRouter.route("/refresh").post(REFRESH_TOKEN);
 
 export { userRouter as USER_ROUTER };

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 
 // PAGES IMPORT
@@ -10,18 +10,69 @@ import HomePage from "./pages/HomePage/HomePage";
 // import Header from "./components/Header/Header";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import AuthPage from "./pages/AuthPage/AuthPage";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
   return (
     <div className="homeContainer">
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/apps" element={<AppsPage />} />
-        <Route path="/analytics" element={<AnalyticsPage />} />
-        <Route path="/notifications" element={<NotificationPage />} />
-        <Route path="/ideos" element={<IdeosPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/auth" element={<AuthPage />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute path="/">
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/apps"
+          element={
+            <ProtectedRoute path="/apps">
+              <AppsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/analytics"
+          element={
+            <ProtectedRoute path="/analytics">
+              <AnalyticsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute path="/notifications">
+              <NotificationPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/ideos"
+          element={
+            <ProtectedRoute path="/ideos">
+              <IdeosPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute path="/settings">
+              <SettingsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/auth" element={<Navigate to="/auth/login" />} />
+        <Route
+          path="/auth/:path"
+          element={
+            <ProtectedRoute path="/auth">
+              <AuthPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<HomePage />} />
       </Routes>
     </div>

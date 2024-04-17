@@ -5,7 +5,7 @@ import Database from "./config/database.js";
 
 // ROUTES
 
-// import { USER_ROUTER } from "./routes/userRoutes.js";
+import { USER_ROUTER } from "./routes/userRoutes.js";
 // import { PRODUCT_CATEGORY_ROUTER } from "./routes/productCategoryRoutes.js";
 // import { PRODUCT_ROUTER } from "./routes/productRoutes.js";
 // import { PRODUCT_ITEM_ROUTER } from "./routes/productItemRoutes.js";
@@ -49,7 +49,7 @@ app.use("/api/test", (req, res) => {
 
 // ROUTES
 
-// app.use("/api/user", USER_ROUTER);
+app.use("/api/user", USER_ROUTER);
 // app.use("/api/queries", QUERY_ROUTER);
 // app.use("/api/mail", MAIL_ROUTER);
 app.use("/api/ideos", IDEOS_ROUTER);
@@ -70,5 +70,5 @@ process.on("SIGINT", async () => {
 // SERVER LISTEN
 
 app.listen(PORT, () => {
-  console.log(`Server: ${PORT} ✅`);
+  console.log(`Server ${PORT} ✅`);
 });

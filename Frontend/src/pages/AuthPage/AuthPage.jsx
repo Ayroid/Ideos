@@ -2,8 +2,20 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import styles from "./AuthPage.module.css";
 
+import { useParams, useNavigate } from "react-router-dom";
+
 import InputField from "../../components/InputField/InputField";
 import CRUDButton from "../../components/CRUDButton/CRUDButton";
+
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
+import {
+  validateUsername,
+  validateEmail,
+  validatePassword,
+} from "../../utils/validationMethods";
+
+import axios from "axios";
 
 const {
   mainDiv,
@@ -41,6 +53,8 @@ const initialLoadAnimation = (setAnimation) => {
 };
 
 const LoginPage = ({ animationOn, pageChanger }) => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -59,10 +73,40 @@ const LoginPage = ({ animationOn, pageChanger }) => {
     }
   }, [animationOn]);
 
+  const validateInputs = () => {
+    return validateUsername(username) && validatePassword(password);
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+
+    if (!validateInputs()) {
+      return;
+    }
+
+    const data = {
+      username,
+      password,
+    };
+
+    axios
+      .post(`${SERVER_URL}/user/login`, data)
+      .then((res) => {
+        localStorage.setItem("accessToken", res.data.accessToken);
+        localStorage.setItem("refreshToken", res.data.refreshToken);
+        navigate("/");
+      })
+      .catch((err) => {
+        if (err.response.status === 404) {
+          navigate("/auth/signup");
+        }
+      });
+  };
+
   return (
     <div className={authMainDiv} id="loginAuthDiv">
       <h6 className={authHeader}>LOGIN</h6>
-      <form>
+      <form onSubmit={submitForm}>
         <InputField
           id="loginEmail"
           type="text"
@@ -104,6 +148,8 @@ LoginPage.propTypes = {
 };
 
 const SignUpPage = ({ animationOn, pageChanger }) => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -127,12 +173,46 @@ const SignUpPage = ({ animationOn, pageChanger }) => {
     }
   }, [animationOn]);
 
+  const validateInputs = () => {
+    return (
+      validateUsername(username) &&
+      validateEmail(email) &&
+      validatePassword(password)
+    );
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+
+    if (!validateInputs()) {
+      return;
+    }
+
+    const data = {
+      username,
+      email,
+      password,
+    };
+
+    axios
+      .post(`${SERVER_URL}/user/signup`, data)
+      .then((res) => {
+        console.log(res.data);
+        navigate("/auth/login");
+      })
+      .catch((err) => {
+        if (err.response.status === 409) {
+          navigate("/auth/login");
+        }
+      });
+  };
+
   return (
     <div className={authMainDiv} id="signUpAuthDiv">
       <h6 className={authHeader}>SIGN UP</h6>
-      <form>
+      <form onSubmit={submitForm}>
         <InputField
-          id="loginEmail"
+          id="signUpUsername"
           type="text"
           value={username}
           valueUpdater={handleUsernameChange}
@@ -144,7 +224,7 @@ const SignUpPage = ({ animationOn, pageChanger }) => {
         />
 
         <InputField
-          id="loginEmail"
+          id="signUpEmail"
           type="email"
           value={email}
           valueUpdater={handleEmailChange}
@@ -156,7 +236,7 @@ const SignUpPage = ({ animationOn, pageChanger }) => {
         />
 
         <InputField
-          id="loginPassword"
+          id="signUpPassword"
           type="password"
           value={password}
           valueUpdater={handlePasswordChange}
@@ -185,14 +265,20 @@ SignUpPage.propTypes = {
 };
 
 const AuthPage = () => {
-  const [authPage, setAuthPage] = useState("login");
+  const navigate = useNavigate();
+  const { path } = useParams();
+  const [authPage, setAuthPage] = useState(path || "login");
   const [animationOn, setAnimationOn] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       initialLoadAnimation(setAnimationOn);
-    }, 2000);
+    }, 1000);
   }, []);
+
+  useEffect(() => {
+    setAuthPage(path);
+  }, [path]);
 
   return (
     <div className="fullWidthContainer">
@@ -204,12 +290,12 @@ const AuthPage = () => {
           {authPage === "login" ? (
             <LoginPage
               animationOn={animationOn}
-              pageChanger={() => setAuthPage("signUp")}
+              pageChanger={() => navigate("/auth/signup")}
             />
           ) : (
             <SignUpPage
               animationOn={animationOn}
-              pageChanger={() => setAuthPage("login")}
+              pageChanger={() => navigate("/auth/login")}
             />
           )}
           <h1 className={hiddenLogoText} id="authInitialHiddenLogo">

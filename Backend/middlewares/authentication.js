@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import pkg from "jsonwebtoken";
-const { sign, decode } = pkg;
+const { sign, decode, verify } = pkg;
 import { StatusCodes } from "http-status-codes";
 
 // CONSTANTS
@@ -34,6 +34,18 @@ const generateAccessTokenFromRefreshToken = (refreshToken) => {
   return generateAccessToken(payload);
 };
 
+// Check Access Token
+
+const checkAccessToken = async (token, tokenType) => {
+  try {
+    return tokenType === "access"
+      ? verify(token, ACCESS_TOKEN_SECRET)
+      : verify(token, REFRESH_TOKEN_SECRET);
+  } catch (error) {
+    return null;
+  }
+};
+
 // Verify Token
 
 const verifyToken = (req, res, next) => {
@@ -59,6 +71,7 @@ const verifyToken = (req, res, next) => {
 export {
   generateAccessToken as GENERATEACCESSTOKEN,
   generateRefreshToken as GENERATEREFRESHTOKEN,
+  checkAccessToken as CHECKACCESSTOKEN,
   generateAccessTokenFromRefreshToken as GENERATEACCESSTOKENFROMREFRESHTOKEN,
   verifyToken as VERIFYTOKEN,
 };
