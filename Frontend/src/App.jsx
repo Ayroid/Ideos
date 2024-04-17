@@ -1,6 +1,8 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 
+import { ToastContainer } from "react-toastify";
+
 // PAGES IMPORT
 import IdeosPage from "./pages/IdeosPage/IdeosPage";
 import AppsPage from "./pages/AppsPage/AppsPage";
@@ -75,6 +77,19 @@ function App() {
         />
         <Route path="*" element={<HomePage />} />
       </Routes>
+      <ToastContainer
+        position="bottom-right"
+        style={{
+          fontSize: "1rem",
+        }}
+        hideProgressBar={true}
+        newestOnTop={false}
+        theme="dark"
+        toastStyle={{
+          boxShadow: "0 0 10px 0px #000000",
+        }}
+        autoClose={2000}
+      />
     </div>
   );
 }

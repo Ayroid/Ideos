@@ -154,8 +154,8 @@ const deleteUserById = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const usename = req.body.usename;
-    const query = { usename };
+    const username = req.body.username;
+    const query = { username };
     const user = await READ_DB(USERMODEL, query);
     if (user.length > 0) {
       const password = req.body.password;

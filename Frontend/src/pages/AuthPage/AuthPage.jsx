@@ -7,6 +7,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import InputField from "../../components/InputField/InputField";
 import CRUDButton from "../../components/CRUDButton/CRUDButton";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 import {
@@ -94,11 +97,16 @@ const LoginPage = ({ animationOn, pageChanger }) => {
       .then((res) => {
         localStorage.setItem("accessToken", res.data.accessToken);
         localStorage.setItem("refreshToken", res.data.refreshToken);
+        toast.success("Login Successful");
         navigate("/");
       })
       .catch((err) => {
         if (err.response.status === 404) {
+          toast.error("Account Does Not Exist");
           navigate("/auth/signup");
+        }
+        if (err.response.status === 401) {
+          toast.error("Invalid Password");
         }
       });
   };
@@ -198,10 +206,12 @@ const SignUpPage = ({ animationOn, pageChanger }) => {
       .post(`${SERVER_URL}/user/signup`, data)
       .then((res) => {
         console.log(res.data);
+        toast.success("Account Created Successfully");
         navigate("/auth/login");
       })
       .catch((err) => {
         if (err.response.status === 409) {
+          toast.error("Username or Email already exists");
           navigate("/auth/login");
         }
       });
