@@ -14,6 +14,8 @@ const InputField = ({
   inputLabel,
   placeholder,
   required,
+  color,
+  bgColor,
 }) => {
   return (
     <div className={formInputDiv}>
@@ -28,6 +30,10 @@ const InputField = ({
         onChange={valueUpdater}
         placeholder={placeholder}
         required={required}
+        style={{
+          color: color,
+          backgroundColor: bgColor,
+        }}
       />
     </div>
   );
@@ -41,6 +47,8 @@ InputField.propTypes = {
   inputLabel: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   required: PropTypes.bool.isRequired,
+  color: PropTypes.string,
+  bgColor: PropTypes.string,
 };
 
 export default InputField;

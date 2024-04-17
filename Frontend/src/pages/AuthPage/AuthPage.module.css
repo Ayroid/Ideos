@@ -15,7 +15,10 @@
 .logoScreen {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
   position: relative;
 }
 
@@ -23,11 +26,12 @@
   font-weight: 500;
   rotate: 270deg;
   font-size: max(10rem, 15dvh);
+  position: absolute;
 }
 
 .transformedLogoText {
-  transform: translateX(85%);
-  scale: 1.35;
+  transform: translateX(90%);
+  scale: 1.25;
 }
 
 .hiddenLogoText {
@@ -36,12 +40,12 @@
   font-size: max(10rem, 15dvh);
   display: none;
   position: absolute;
-  scale: 1.35;
+  scale: 1.25;
 }
 
 .transformedHiddenLogoText {
-  transform: translateX(-100%);
-  scale: 1.35;
+  transform: translateX(-105%);
+  scale: 1.25;
   display: block;
 }
 
@@ -51,18 +55,19 @@
 
 @keyframes logoTextAnimation {
   0% {
+    transform: translateX(0%);
     scale: 1;
   }
   100% {
-    transform: translateX(85%);
-    scale: 1.35;
+    transform: translateX(90%);
+    scale: 1.25;
   }
 }
 
 .hiddenLogoTextAnimation {
   animation: hiddenLogoTextAnimation 1s ease-in-out;
   display: block;
-  scale: 1.35;
+  scale: 1.25;
 }
 
 @keyframes hiddenLogoTextAnimation {
@@ -70,6 +75,66 @@
     transform: translateX(-150%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-105%);
   }
+}
+
+.authMainDiv {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  animation: fadeUp 0.5s ease-in-out;
+  display: none;
+}
+
+@keyframes fadeUp {
+  0% {
+    transform: translateY(2px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.authHeader {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.formSeparator {
+  font-size: 1.75rem;
+  color: var(--lightText);
+  margin-block: 0.5rem;
+  font-family: "Dongle", sans-serif;
+}
+
+.googleAuthButton {
+  background-color: var(--lightBg);
+  border-radius: 10px;
+  padding: 0rem 2rem;
+  width: fit-content;
+}
+
+.googleAuthButton img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.pageChangeButton {
+  color: var(--lightBg);
+  font-size: 1.75rem;
+  text-align: center;
+  font-family: "Dongle", sans-serif;
+  line-height: 1.25rem;
+  margin-top: 2rem;
+}
+
+.pageChangeButton span {
+  color: var(--accentColor);
 }

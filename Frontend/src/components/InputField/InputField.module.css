@@ -9,7 +9,7 @@
   padding: 0.5rem 1rem;
   font-size: 1.5rem;
   width: 100%;
-  height: 3.2rem;
+  height: 2.75rem;
   color: var(--lightText);
   background-color: var(--darkText);
   font-weight: 600;
@@ -34,15 +34,16 @@
 
 .formInput::placeholder {
   font-weight: 600;
-  color: var(--lightText);
+  color: var(--darkText);
 }
 
 .label {
   font-size: 1.5rem;
   background-color: transparent;
-  color: var(--lightDark);
+  color: var(--lightText);
   font-weight: 600;
   transition: 0.1s ease-out;
   pointer-events: none;
   margin-bottom: -0.25rem;
+  font-family: "Dongle", sans-serif;
 }

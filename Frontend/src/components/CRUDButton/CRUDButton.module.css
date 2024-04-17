@@ -1,9 +1,9 @@
 .crudButton {
   font-weight: 900;
-  font-size: 2rem;
   border: none;
   border-radius: 10px;
   padding-top: 0.25rem;
+  font-size: 1.75rem;
   cursor: pointer;
   transition: background-color 0.15s;
   font-family: "Dongle", sans-serif;
