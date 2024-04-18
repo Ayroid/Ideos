@@ -1,12 +1,12 @@
 // IMPORTS
 import PropTypes from "prop-types";
-import styles from "./InputField.module.css";
+import styles from "./InputFieldAuth.module.css";
 
 // CSS STYLES
 const { formInputDiv, formInput, label } = styles;
 
 // COMPONENT
-const InputField = ({
+const InputFieldAuth = ({
   id,
   type,
   value,
@@ -39,7 +39,7 @@ const InputField = ({
   );
 };
 
-InputField.propTypes = {
+InputFieldAuth.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
@@ -51,4 +51,4 @@ InputField.propTypes = {
   bgColor: PropTypes.string,
 };
 
-export default InputField;
+export default InputFieldAuth;

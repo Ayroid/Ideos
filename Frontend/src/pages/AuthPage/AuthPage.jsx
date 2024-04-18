@@ -4,7 +4,7 @@ import styles from "./AuthPage.module.css";
 
 import { useParams, useNavigate } from "react-router-dom";
 
-import InputField from "../../components/InputField/InputField";
+import InputFieldAuth from "../../components/InputFieldAuth/InputFieldAuth";
 import CRUDButton from "../../components/CRUDButton/CRUDButton";
 
 import { toast } from "react-toastify";
@@ -115,7 +115,7 @@ const LoginPage = ({ animationOn, pageChanger }) => {
     <div className={authMainDiv} id="loginAuthDiv">
       <h6 className={authHeader}>LOGIN</h6>
       <form onSubmit={submitForm}>
-        <InputField
+        <InputFieldAuth
           id="loginEmail"
           type="text"
           value={username}
@@ -126,7 +126,7 @@ const LoginPage = ({ animationOn, pageChanger }) => {
           bgColor={"var(--lightBg)"}
           color={"var(--darkText)"}
         />
-        <InputField
+        <InputFieldAuth
           id="loginPassword"
           type="password"
           value={password}
@@ -221,7 +221,7 @@ const SignUpPage = ({ animationOn, pageChanger }) => {
     <div className={authMainDiv} id="signUpAuthDiv">
       <h6 className={authHeader}>SIGN UP</h6>
       <form onSubmit={submitForm}>
-        <InputField
+        <InputFieldAuth
           id="signUpUsername"
           type="text"
           value={username}
@@ -233,7 +233,7 @@ const SignUpPage = ({ animationOn, pageChanger }) => {
           color={"var(--darkText)"}
         />
 
-        <InputField
+        <InputFieldAuth
           id="signUpEmail"
           type="email"
           value={email}
@@ -245,7 +245,7 @@ const SignUpPage = ({ animationOn, pageChanger }) => {
           color={"var(--darkText)"}
         />
 
-        <InputField
+        <InputFieldAuth
           id="signUpPassword"
           type="password"
           value={password}

@@ -78,7 +78,7 @@ function App() {
         <Route path="*" element={<HomePage />} />
       </Routes>
       <ToastContainer
-        position="bottom-right"
+        position="top-center"
         style={{
           fontSize: "1rem",
         }}
@@ -88,7 +88,7 @@ function App() {
         toastStyle={{
           boxShadow: "0 0 10px 0px #000000",
         }}
-        autoClose={2000}
+        autoClose={3000}
       />
     </div>
   );

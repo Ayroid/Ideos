@@ -25,6 +25,11 @@ a:active {
   text-decoration: none;
 }
 
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px inherit inset !important;
+  -webkit-text-fill-color: inherit !important;
+}
+
 body {
   margin: 0;
   padding: 0;

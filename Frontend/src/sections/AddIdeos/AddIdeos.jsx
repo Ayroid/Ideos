@@ -22,7 +22,7 @@ const {
   scrollDownAnimation,
 } = styles;
 
-const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
+const AddIdeos = ({ updateData, showAddIdeos, hideAddIdeos }) => {
   const [loading, setLoading] = useState(false);
   const [ideosCategory, setIdeosCategory] = useState("Choose");
   const [ideosTitle, setIdeosTitle] = useState("");
@@ -95,6 +95,7 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
       .post(`${import.meta.env.VITE_SERVER_URL}/ideos`, formData)
       .then((response) => {
         console.log(response.data);
+        updateData(response.data);
         hideAddIdeos();
       })
       .catch((error) => {
@@ -164,6 +165,7 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
 };
 
 AddIdeos.propTypes = {
+  updateData: PropTypes.func.isRequired,
   showAddIdeos: PropTypes.bool.isRequired,
   hideAddIdeos: PropTypes.func.isRequired,
 };

@@ -27,6 +27,7 @@
   rotate: 270deg;
   font-size: max(10rem, 15dvh);
   position: absolute;
+  user-select: none;
 }
 
 .transformedLogoText {
@@ -41,6 +42,7 @@
   display: none;
   position: absolute;
   scale: 1.25;
+  user-select: none;
 }
 
 .transformedHiddenLogoText {

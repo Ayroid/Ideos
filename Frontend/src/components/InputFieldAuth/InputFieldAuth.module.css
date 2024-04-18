@@ -24,8 +24,8 @@
 .formInput:-webkit-autofill:hover,
 .formInput:-webkit-autofill:focus,
 .formInput:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px var(--darkBg) inset !important;
-  -webkit-text-fill-color: var(--lightText) !important;
+  -webkit-box-shadow: 0 0 0 30px var(--lightBg) inset !important;
+  -webkit-text-fill-color: var(--darkText) !important;
 }
 
 .formInput:focus {
@@ -34,7 +34,7 @@
 
 .formInput::placeholder {
   font-weight: 600;
-  color: var(--lightText);
+  color: var(--darkText);
 }
 
 .label {
