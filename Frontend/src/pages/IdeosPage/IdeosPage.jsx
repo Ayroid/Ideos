@@ -73,7 +73,16 @@ const IdeosPage = () => {
           <BlankScreen />
         )}
       </div>
-      <CRUDButton text={"ADD IDEOS"} action={showAddIdeosComp} />
+      <CRUDButton
+        text={"ADD IDEOS"}
+        action={showAddIdeosComp}
+        style={{
+          backgroundColor: "var(--accentColor)",
+          color: "var(--darkText)",
+          width: "100%",
+          height: "3.2rem",
+        }}
+      />
       <Navigation />
     </div>
   );

@@ -10,6 +10,9 @@ import CRUDButton from "../../components/CRUDButton/CRUDButton";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { useDispatch } from "react-redux";
+import { updateNavigation } from "../../redux/slices/activeNavigation";
+
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 import {
@@ -57,6 +60,7 @@ const initialLoadAnimation = (setAnimation) => {
 
 const LoginPage = ({ animationOn, pageChanger }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -97,6 +101,7 @@ const LoginPage = ({ animationOn, pageChanger }) => {
       .then((res) => {
         localStorage.setItem("accessToken", res.data.accessToken);
         localStorage.setItem("refreshToken", res.data.refreshToken);
+        dispatch(updateNavigation("home"));
         toast.success("Login Successful");
         navigate("/");
       })
@@ -137,7 +142,15 @@ const LoginPage = ({ animationOn, pageChanger }) => {
           bgColor={"var(--lightBg)"}
           color={"var(--darkText)"}
         />
-        <CRUDButton type="submit" text="LOGIN" />
+        <CRUDButton
+          type="submit"
+          text="LOGIN"
+          style={{
+            backgroundColor: "var(--accentColor)",
+            color: "var(--darkText)",
+            width: "100%",
+          }}
+        />
       </form>
       <p className={formSeparator}>Or</p>
       <div className={googleAuthButton}>
@@ -256,7 +269,15 @@ const SignUpPage = ({ animationOn, pageChanger }) => {
           bgColor={"var(--lightBg)"}
           color={"var(--darkText)"}
         />
-        <CRUDButton type="submit" text="SIGN UP" />
+        <CRUDButton
+          type="submit"
+          text="SIGN UP"
+          style={{
+            backgroundColor: "var(--accentColor)",
+            color: "var(--darkText)",
+            width: "100%",
+          }}
+        />
       </form>
       <p className={formSeparator}>Or</p>
       <div className={googleAuthButton}>

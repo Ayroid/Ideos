@@ -7,14 +7,19 @@ import CRUDButton from "../../components/CRUDButton/CRUDButton";
 
 import { toast } from "react-toastify";
 
+import { useDispatch } from "react-redux";
+import { updateNavigation } from "../../redux/slices/activeNavigation";
+
 const { mainDiv } = styles;
 
 const SettingsPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const logoutUser = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
+    dispatch(updateNavigation("home"));
     toast.success("Logged Out Successfully");
     navigate("/auth/login");
   };
@@ -26,8 +31,11 @@ const SettingsPage = () => {
         <CRUDButton
           text="Log Out"
           action={logoutUser}
-          color="white"
-          backgroundColor="red"
+          style={{
+            backgroundColor: "red",
+            color: "white",
+            width: "100%",
+          }}
         />
       </div>
       <Navigation />

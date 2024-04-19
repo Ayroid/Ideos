@@ -152,12 +152,22 @@ const AddIdeos = ({ updateData, showAddIdeos, hideAddIdeos }) => {
         <div className={ideosButtons}>
           <CRUDButton
             text={"CANCEL"}
-            width="46%"
-            backgroundColor="var(--darkBg)"
-            color="var(--lightText)"
             action={hideAddIdeos}
+            style={{
+              backgroundColor: "var(--darkBg)",
+              color: "var(--lightText)",
+              width: "46%",
+            }}
           />
-          <CRUDButton text={"DONE"} width="46%" action={addNewIdeos} />
+          <CRUDButton
+            text={"DONE"}
+            action={addNewIdeos}
+            style={{
+              backgroundColor: "var(--accentColor)",
+              color: "var(--darkText)",
+              width: "46%",
+            }}
+          />
         </div>
       </div>
     </div>
