@@ -36,6 +36,7 @@ const createIdeos = async (req, res) => {
     }
 
     record = await CREATE_DB(IDEOSMODEL, {
+      userId: req.user.id,
       ideosCategory,
       ideosTitle,
       ideosDescription,

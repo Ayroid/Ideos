@@ -15,6 +15,7 @@ import { USER_ROUTER } from "./routes/userRoutes.js";
 // import { QUERY_ROUTER } from "./routes/queriesRoutes.js";
 // import { MAIL_ROUTER } from "./routes/mailRoutes.js";
 import { IDEOS_ROUTER } from "./routes/ideosRoutes.js";
+import { VERIFYTOKEN } from "./middlewares/authentication.js";
 
 // DOTENV CONFIG
 
@@ -52,7 +53,7 @@ app.use("/api/test", (req, res) => {
 app.use("/api/user", USER_ROUTER);
 // app.use("/api/queries", QUERY_ROUTER);
 // app.use("/api/mail", MAIL_ROUTER);
-app.use("/api/ideos", IDEOS_ROUTER);
+app.use("/api/ideos", VERIFYTOKEN, IDEOS_ROUTER);
 
 // DATABASE DISCONNECT
 

@@ -4,6 +4,10 @@ import mongoose from "mongoose";
 
 const ideosSchema = new mongoose.Schema(
   {
+    userId: {
+      type: String,
+      required: true,
+    },
     ideosCategory: {
       type: String,
       required: true,

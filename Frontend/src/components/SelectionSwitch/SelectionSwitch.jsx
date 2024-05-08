@@ -19,6 +19,7 @@ const SelectionSwitch = ({ id, inputLabel, value, valueUpdater, options }) => {
         {options.map((option) => (
           <div
             key={option.toLowerCase()}
+            id={option.toLowerCase() + "Priority"}
             className={[
               selectionSwitchOption,
               value === option ? selectionSwitchActive : "",

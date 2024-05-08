@@ -28,7 +28,7 @@ const DropDownSelectField = ({
         onInput={valueUpdater}
         required={required}
       >
-        <option id="defaultDrop" defaultChecked defaultValue={defaultOption}>
+        <option id="defaultDrop" value={defaultOption} defaultChecked>
           {defaultOption}
         </option>
         {options.map((option) => (

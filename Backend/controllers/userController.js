@@ -5,7 +5,6 @@ import { genSalt, hash, compare } from "bcrypt";
 import {
   GENERATEACCESSTOKEN,
   GENERATEREFRESHTOKEN,
-  CHECKACCESSTOKEN,
 } from "../middlewares/authentication.js";
 import { SENDMAIL } from "../utils/mailer.js";
 
@@ -188,54 +187,6 @@ const loginUser = async (req, res) => {
   }
 };
 
-const verifyToken = async (req, res) => {
-  const token = req.headers["authorization"];
-  if (!token) {
-    return res
-      .status(StatusCodes.UNAUTHORIZED)
-      .json({ message: "Access denied" });
-  }
-  try {
-    const tokenValid = await CHECKACCESSTOKEN(token, "access");
-    if (tokenValid) {
-      return res.status(StatusCodes.OK).send("Token Verified");
-    }
-
-    return res
-      .status(StatusCodes.UNAUTHORIZED)
-      .json({ message: "Invalid token" });
-  } catch (error) {
-    console.log("Error Verifying Token", { error });
-
-    return res
-      .status(StatusCodes.UNAUTHORIZED)
-      .json({ message: "Invalid token" });
-  }
-};
-
-const refreshToken = async (req, res) => {
-  try {
-    const token = req.headers["authorization"];
-    const tokenValid = await CHECKACCESSTOKEN(token, "refresh");
-    if (!tokenValid) {
-      return res
-        .status(StatusCodes.UNAUTHORIZED)
-        .json({ message: "Invalid token" });
-    }
-    const payload = {
-      email: tokenValid.email,
-      id: tokenValid.id,
-    };
-    const accessToken = GENERATEACCESSTOKEN(payload);
-    const refreshToken = GENERATEREFRESHTOKEN(payload);
-    return res.status(StatusCodes.OK).send({ accessToken, refreshToken });
-  } catch (error) {
-    return res
-      .status(StatusCodes.UNAUTHORIZED)
-      .json({ message: "Invalid token" });
-  }
-};
-
 export {
   createUser as CREATE_USER,
   readUser as READ_USER,
@@ -243,6 +194,4 @@ export {
   updateUserById as UPDATE_USER_ID,
   deleteUserById as DELETE_USER_ID,
   loginUser as LOGIN_USER,
-  verifyToken as VERIFY_TOKEN,
-  refreshToken as REFRESH_TOKEN,
 };

@@ -16,6 +16,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    ideosArray: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ideos",
+      },
+    ],
   },
   { timestamps: true }
 );

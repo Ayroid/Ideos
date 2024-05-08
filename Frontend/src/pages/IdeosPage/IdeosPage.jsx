@@ -81,6 +81,7 @@ const IdeosPage = () => {
           color: "var(--darkText)",
           width: "100%",
           height: "3.2rem",
+          marginTop: "1rem",
         }}
       />
       <Navigation />

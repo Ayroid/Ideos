@@ -50,6 +50,8 @@ const checkAccessToken = async (token, tokenType) => {
 
 const verifyToken = (req, res, next) => {
   const token = req.headers["authorization"];
+  console.log(req.headers);
+  console.log("Verifying Token", { token });
   if (!token) {
     return res
       .status(StatusCodes.UNAUTHORIZED)
@@ -66,6 +68,54 @@ const verifyToken = (req, res, next) => {
   }
 };
 
+const verifyAccessToken = async (req, res) => {
+  const token = req.headers.authorization;
+  if (!token) {
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ message: "Access denied" });
+  }
+  try {
+    const tokenValid = await checkAccessToken(token, "access");
+    if (tokenValid) {
+      return res.status(StatusCodes.OK).send("Token Verified");
+    }
+
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ message: "Invalid token" });
+  } catch (error) {
+    console.log("Error Verifying Token", { error });
+
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ message: "Invalid token" });
+  }
+};
+
+const refreshAccessToken = async (req, res) => {
+  try {
+    const token = req.headers.authorization;
+    const tokenValid = await checkAccessToken(token, "refresh");
+    if (!tokenValid) {
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ message: "Invalid token" });
+    }
+    const payload = {
+      email: tokenValid.email,
+      id: tokenValid.id,
+    };
+    const accessToken = generateAccessToken(payload);
+    const refreshToken = generateRefreshToken(payload);
+    return res.status(StatusCodes.OK).send({ accessToken, refreshToken });
+  } catch (error) {
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ message: "Invalid token" });
+  }
+};
+
 // EXPORTING MODULES
 
 export {
@@ -74,4 +124,6 @@ export {
   checkAccessToken as CHECKACCESSTOKEN,
   generateAccessTokenFromRefreshToken as GENERATEACCESSTOKENFROMREFRESHTOKEN,
   verifyToken as VERIFYTOKEN,
+  verifyAccessToken as VERIFYACCESSTOKEN,
+  refreshAccessToken as REFRESHACCESSTOKEN,
 };

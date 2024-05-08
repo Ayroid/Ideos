@@ -6,9 +6,15 @@ const useFetch = ({ url }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  const accessToken = localStorage.getItem("accessToken");
+
   const fetch = () => {
     axios
-      .get(url)
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
       .then((res) => {
         setData(res.data);
       })
@@ -28,7 +34,7 @@ const useFetch = ({ url }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
-  return { data, error, loading, refetchData: fetch, setData };
+  return { data, error, loading, setData, refetchData: fetch };
 };
 
 export default useFetch;
