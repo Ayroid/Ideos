@@ -6,13 +6,11 @@ const useFetch = ({ url }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const accessToken = localStorage.getItem("accessToken");
-
   const fetch = () => {
     axios
       .get(url, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       })
       .then((res) => {

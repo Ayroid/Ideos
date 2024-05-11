@@ -32,7 +32,7 @@ const IdeosPage = () => {
   // SHOW ADD IDEOS SECTION STATE
   const [showAddIdeos, setShowAddIdeos] = useState(false);
 
-  const { data, loading, setData } = useFetch({
+  const { data, loading } = useFetch({
     url: `${import.meta.env.VITE_SERVER_URL}/ideos/`,
   });
 
@@ -46,18 +46,10 @@ const IdeosPage = () => {
     setShowAddIdeos(false);
   };
 
-  const updateData = (newData) => {
-    setData(...data, newData);
-  };
-
   return (
     <div className="pageContainer">
       <Header />
-      <AddIdeos
-        updateData={updateData}
-        showAddIdeos={showAddIdeos}
-        hideAddIdeos={hideAddIdeosComp}
-      />
+      <AddIdeos showAddIdeos={showAddIdeos} hideAddIdeos={hideAddIdeosComp} />
       <div className={ideosPageMainDiv}>
         <div className={pageHeader}>
           <p className={pageHeading}>

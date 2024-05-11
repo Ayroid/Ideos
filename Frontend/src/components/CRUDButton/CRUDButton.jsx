@@ -3,15 +3,7 @@ import PropTypes from "prop-types";
 
 const { crudButton } = styles;
 
-const CRUDButton = ({
-  backgroundColor = "var(--accentColor)",
-  color = "var(--darkText)",
-  width = "100%",
-  height,
-  style,
-  text,
-  action,
-}) => {
+const CRUDButton = ({ style, text, action }) => {
   return (
     <button className={crudButton} style={style} onClick={action}>
       {text}
@@ -20,10 +12,6 @@ const CRUDButton = ({
 };
 
 CRUDButton.propTypes = {
-  backgroundColor: PropTypes.string,
-  color: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string,
   style: PropTypes.object,
   text: PropTypes.string.isRequired,
   action: PropTypes.func,

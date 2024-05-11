@@ -73,7 +73,11 @@ const Ideo = ({ ideo }) => {
   const deleteIdeos = () => {
     setLoading(true);
     axios
-      .delete(`${import.meta.env.VITE_SERVER_URL}/ideos/${ideo._id}`)
+      .delete(`${import.meta.env.VITE_SERVER_URL}/ideos/${ideo._id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
       .then((response) => {
         console.log(response.data);
       })

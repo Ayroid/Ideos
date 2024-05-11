@@ -22,7 +22,7 @@ const {
   scrollDownAnimation,
 } = styles;
 
-const AddIdeos = ({ updateData, showAddIdeos, hideAddIdeos }) => {
+const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
   const [loading, setLoading] = useState(false);
   const [ideosCategory, setIdeosCategory] = useState("Choose");
   const [ideosTitle, setIdeosTitle] = useState("");
@@ -92,10 +92,13 @@ const AddIdeos = ({ updateData, showAddIdeos, hideAddIdeos }) => {
     };
 
     axios
-      .post(`${import.meta.env.VITE_SERVER_URL}/ideos`, formData)
+      .post(`${import.meta.env.VITE_SERVER_URL}/ideos`, formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
       .then((response) => {
         console.log(response.data);
-        updateData(response.data);
         hideAddIdeos();
       })
       .catch((error) => {
@@ -175,7 +178,6 @@ const AddIdeos = ({ updateData, showAddIdeos, hideAddIdeos }) => {
 };
 
 AddIdeos.propTypes = {
-  updateData: PropTypes.func.isRequired,
   showAddIdeos: PropTypes.bool.isRequired,
   hideAddIdeos: PropTypes.func.isRequired,
 };
