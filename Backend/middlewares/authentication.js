@@ -50,8 +50,6 @@ const checkAccessToken = async (token, tokenType) => {
 
 const verifyToken = (req, res, next) => {
   const token = req.headers["authorization"];
-  console.log(req.headers);
-  console.log("Verifying Token", { token });
   if (!token) {
     return res
       .status(StatusCodes.UNAUTHORIZED)
