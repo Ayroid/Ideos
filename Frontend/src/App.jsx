@@ -9,6 +9,7 @@ import AppsPage from "./pages/AppsPage/AppsPage";
 import AnalyticsPage from "./pages/AnalyticsPage/AnalyticsPage";
 import NotificationPage from "./pages/NotificationPage/NotificationPage";
 import HomePage from "./pages/HomePage/HomePage";
+// import Header from "./components/Header/Header";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
