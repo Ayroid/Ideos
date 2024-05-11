@@ -3,7 +3,7 @@ import "./App.css";
 
 import { ToastContainer } from "react-toastify";
 
-// PAGES IMPORT
+// PAGES IMPORT - Importing Pages
 import IdeosPage from "./pages/IdeosPage/IdeosPage";
 import AppsPage from "./pages/AppsPage/AppsPage";
 import AnalyticsPage from "./pages/AnalyticsPage/AnalyticsPage";
