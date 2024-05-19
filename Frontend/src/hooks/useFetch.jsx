@@ -10,7 +10,7 @@ const useFetch = ({ url }) => {
     axios
       .get(url, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: localStorage.getItem("accessToken"),
         },
       })
       .then((res) => {

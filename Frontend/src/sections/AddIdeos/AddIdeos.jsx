@@ -94,7 +94,7 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
     axios
       .post(`${import.meta.env.VITE_SERVER_URL}/ideos`, formData, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: localStorage.getItem("accessToken"),
         },
       })
       .then((response) => {
