@@ -12,6 +12,9 @@ import Loading from "../../components/Loading/Loading";
 import useFetch from "../../hooks/useFetch";
 import Ideo from "../../components/Ideo/Ideo";
 
+import { useDispatch, useSelector } from "react-redux";
+import { updateIdeosData } from "../../redux/slices/ideosData";
+
 const { ideosPageMainDiv, pageHeader, pageHeading, noIdeos } = styles;
 
 const BlankScreen = () => {
@@ -35,6 +38,12 @@ const IdeosPage = () => {
   const { data, loading } = useFetch({
     url: `${import.meta.env.VITE_SERVER_URL}/ideos/`,
   });
+
+  const ideosDataState = useSelector((state) => state.ideosData.value);
+  console.log(ideosDataState);
+
+  const dispatch = useDispatch();
+  dispatch(updateIdeosData(data));
 
   // UPDATER FUNCTIONS
 
@@ -60,7 +69,7 @@ const IdeosPage = () => {
         {loading ? (
           <Loading />
         ) : data ? (
-          <IdeosScreen ideos={data} />
+          <IdeosScreen ideos={ideosDataState} />
         ) : (
           <BlankScreen />
         )}

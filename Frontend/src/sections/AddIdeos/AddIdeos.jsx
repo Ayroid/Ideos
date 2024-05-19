@@ -10,6 +10,9 @@ import TextAreaField from "../../components/TextAreaField/TextAreaField";
 import SelectionSwitch from "../../components/SelectionSwitch/SelectionSwitch";
 import FormLoading from "../../components/FormLoading/FormLoading";
 
+import { useDispatch } from "react-redux";
+import { addIdeosData } from "../../redux/slices/ideosData";
+
 const {
   mainDiv,
   loadingDiv,
@@ -23,6 +26,8 @@ const {
 } = styles;
 
 const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
+  const dispatch = useDispatch();
+
   const [loading, setLoading] = useState(false);
   const [ideosCategory, setIdeosCategory] = useState("Choose");
   const [ideosTitle, setIdeosTitle] = useState("");
@@ -90,6 +95,8 @@ const AddIdeos = ({ showAddIdeos, hideAddIdeos }) => {
       ideosDescription,
       ideosPriority,
     };
+
+    dispatch(addIdeosData(formData));
 
     axios
       .post(`${import.meta.env.VITE_SERVER_URL}/ideos`, formData, {
