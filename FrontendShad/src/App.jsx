@@ -1,7 +1,8 @@
-import { Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { Toaster } from "@/components/ui/toaster";
 
 import AuthPage from "./pages/AuthPage/AuthPage";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
   return (
@@ -13,21 +14,17 @@ function App() {
             <div className="text-3xl font-bold">Welcome to the Home Page!</div>
           }
         />
-        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/auth" element={<Navigate to="/auth/login" />} />
+        <Route
+          path="/auth/login"
+          element={
+            <ProtectedRoute path="/auth">
+              <AuthPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-      <ToastContainer
-        position="top-center"
-        style={{
-          fontSize: "1rem",
-        }}
-        hideProgressBar={true}
-        newestOnTop={false}
-        theme="dark"
-        toastStyle={{
-          boxShadow: "0 0 10px 0px #000000",
-        }}
-        autoClose={3000}
-      />
+      <Toaster />
     </div>
   );
 }
